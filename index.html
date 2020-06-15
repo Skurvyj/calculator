@@ -23,6 +23,11 @@
                   </div>
               </div>
           </div>
+          <div id = "footerWrap">
+              <div id = "footer">
+                  Julia McCauley 2020
+              </div>
+          </div>
       </div>
 
   <script>
@@ -31,6 +36,10 @@
       const numButs = document.querySelector("#numButs");
       const opButs = document.querySelector("#opButs");
       const topButs = document.querySelector("#topButs");
+      const header = document.querySelector("#header");
+      const heading = document.createElement('h1');
+      heading.textContent = "Calculate";
+      header.appendChild(heading);
 
          
 
@@ -89,6 +98,14 @@
           button.textContent = ".";
           topButs.appendChild(button);
 
+    const back = document.createElement('div');
+          back.className = "calcButton";
+          back.classList.add("topButs");
+          back.addEventListener("click", enterText);
+          back.id = "back";
+          back.textContent = "←";
+          topButs.appendChild(back);
+
         /* -creating display area for calc*/
         const outputDisplay = document.createElement('div');
       outputDisplay.className = "display";
@@ -113,6 +130,7 @@
        
          if(clicked.classList.contains("number")){
              if(lastEntered == "." && clicked.textContent == "."){}
+             else if(textBox.textContent.length > 9){}
             else if (lastEntered == "="){
                 console.log("works");
                 textBox.textContent = clicked.textContent;
@@ -129,8 +147,15 @@
         if(clicked.classList.contains("operation")){
             if(op!=""){
                 b = textBox.textContent;
-                result = operate(op,a,b);
-                a = operate(op, a, b);
+                let result = operate(op,a,b);
+                /*
+                Known error where if you try to 
+                chain operations with expontential
+                formatted numbers, doesn't work correctly */
+                if(result > 100000000){
+                    result = result.toExponential(places - 2)
+                }
+                a = result;
                 textBox.textContent = a;
                 b = "";
                 lastEntered = "=";
@@ -171,12 +196,22 @@
             }
 
             if(op != "" && b!= ""){
-                textBox.textContent = operate(op, a, b);
+                let result = operate(op, a, b)
+                if(result > 100000000){
+                    result = result.toExponential(places - 2)
+                }
+                textBox.textContent = result;
                 a = textBox.textContent;
                 op = ""
-                b = ""
+                b = ""     
             }
 
+        }
+        if(clicked.id == "back"){
+            if(lastEntered!= "="){
+                textBox.textContent = textBox.textContent.slice(0, -1);
+            }
+            
         } 
       }
 

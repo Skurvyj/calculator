@@ -13,14 +13,31 @@ body,html {
 #container{
     width: 100vw;
     height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr 4fr 1fr;
     align-items: center; /* makes sketch float in center*/
     justify-content: center;
 }
 
+
+#header{
+    padding: 10px;
+    margin: 10px;
+    color: #fff1c1;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Arial';
+}
+
+#footer{
+    color: #fff1c1c2;
+    font-size: 14px;
+    text-align: center
+}
+
 #calcwrap{
     width: 500px;
-    height: 500px;
+    height: 500px; 
 }
 
 #calc{
@@ -29,7 +46,7 @@ body,html {
     grid-template-rows: auto;
     align-items: center;
     justify-content: center;
-    z-index: -1;
+    z-index: -1;   
 }
 
 #numButs{
@@ -64,7 +81,7 @@ body,html {
 }
 
 #num0{
-    width: 146px;
+    width: 76px;
     z-index: 1;
 }
 
@@ -82,6 +99,13 @@ body,html {
     left: 140px;
     width: 6px;
 
+}
+
+#back{
+    position: relative;
+    left: 140px;
+    bottom: 62px;
+    height: 28px;
 }
 
 #topButs{
@@ -134,4 +158,12 @@ body,html {
     border-color: #fff1c1;
     transform: scale(1.02);
 }
+
+.calcButton:hover{
+    color:#fff1c1;
+}
+
+/* IMPLEMENT TEXT COLOR CHANGE ON HOVER
+   IMPLEMENT FIX FOR 5/3 * 3 = 5.000001 
+   */
 
