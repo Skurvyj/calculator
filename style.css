@@ -1,0 +1,138 @@
+html{
+    /*background-color: rgb(22, 28, 75);*/
+    background-color:#293462;
+    
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center; /* makes sketch float in center*/
+    justify-content: center;
+}
+
+#calcwrap{
+    width: 500px;
+    height: 500px;
+}
+
+#calc{
+    display: grid;
+    grid-template-columns: 210px 70px;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+#numButs{
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(4, 62px);
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 62px;
+}
+
+#num1, #num4, #num7{
+    position: relative;
+    right: 140px;
+}
+
+#num3, #num6, #num9{
+    position: relative;
+    left: 140px;
+    
+}
+
+#opClear, #decimal{
+    position: relative;
+    bottom: 248px;
+}
+
+#opButs{
+    display: grid;
+    grid-template-columns: 70px;
+}
+
+#num0{
+    width: 146px;
+    z-index: 1;
+}
+
+#opClear{
+    width: 76px;
+}
+
+#decimal{
+    position: relative;
+    right: 70px;
+}
+
+#opEq{
+    position: relative;
+    left: 140px;
+    width: 6px;
+
+}
+
+#topButs{
+    display: grid;
+    grid-template-columns: 70px 140px 70px;
+    position: relative;
+}
+
+
+#resultText{
+    position: relative;
+    bottom: 30px;
+    right: 10px;
+    font-family: Gill Sans;
+    font-stretch: extra-expanded;
+}
+
+
+.display{
+    display: grid;
+    height: 60px;
+    top: 50px;
+    margin: 1px;
+    /*border: 2px solid white;*/
+    border: 2px solid #fff1c1;
+    border-radius: 5px;
+    color: #fff1c1;
+    text-align: right;
+    font-size: 40px;
+   
+}
+
+.calcButton{
+    display: grid;
+    padding: 20px 30px 20px 30px;
+    justify-content: center;
+    /*border: 1px solid rgb(22, 28, 75);*/
+    border: 1px solid #293462;
+    border-radius: 5px;
+    margin: 1px;
+    /*background-color: rgb(125, 192, 231);*/
+    background-color: #f76262;
+    text-align: center;
+    font-size: 16px;
+    /*color: rgb(22, 28, 75);*/
+    color: #293462;
+}
+
+.calcButton:active{
+    /*border-color:  rgb(255, 199, 135);*/
+    border-color: #fff1c1;
+    transform: scale(1.02);
+}
+

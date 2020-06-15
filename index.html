@@ -6,8 +6,197 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+      <div id = "container">
+          <div id = "headerWrap">
+              <div id = "header">
+              </div>
+          </div>
+          <div id ="calcWrap">
+              <div id = "disWrap">  
+              </div>
+              <div id = "calc">
+                  <div id="numButs">
+                  </div> 
+                  <div id = "opButs">
+                  </div>
+                  <div id = "topButs">
+                  </div>
+              </div>
+          </div>
+      </div>
 
   <script>
+      /* Creating HTML */
+      const dWrap = document.querySelector("#disWrap");
+      const numButs = document.querySelector("#numButs");
+      const opButs = document.querySelector("#opButs");
+      const topButs = document.querySelector("#topButs");
+
+         
+
+           /* -creating buttons for calc*/
+      for(i = 15; i > -1; i--){
+          const button = document.createElement('div');
+          button.className = "calcButton";
+          button.addEventListener("click", enterText);
+          if(i < 10){
+          button.classList.add("number");
+          button.id = "num" + i;
+          button.textContent = i;
+          numButs.appendChild(button);
+          }
+          else{
+            console.log(i);
+              switch(i){
+                  case(13): {button.id = "opAdd";
+                             button.textContent = "+";
+                             button.classList.add("operation");
+                             opButs.appendChild(button);
+                             break;};
+                  case(12): {button.id = "opSub"; 
+                             button.textContent = "⁠—";
+                             button.classList.add("operation");
+                             opButs.appendChild(button);
+                             break;};
+                  case(11): {button.id = "opMult"; 
+                             button.textContent = "x";
+                             button.classList.add("operation");
+                             opButs.appendChild(button);
+                             break;};
+                  case(10): {button.id = "opDivy"; 
+                             button.textContent = "÷";
+                             button.classList.add("operation");
+                             opButs.appendChild(button);
+                             break;};
+                  case(14): {button.id = "opEq"; 
+                             button.textContent = "=";
+                             topButs.appendChild(button);
+                             break;};
+                  case(15): {button.id = "opClear"; 
+                             button.textContent = "AC";
+                             topButs.append(button);
+                             break}; 
+                  default: alert("ERRRRRoR");       
+              }
+          }
+          
+      }
+      const button = document.createElement('div');
+          button.className = "calcButton";
+          button.classList.add("number");
+          button.addEventListener("click", enterText);
+          button.id = "decimal";
+          button.textContent = ".";
+          topButs.appendChild(button);
+
+        /* -creating display area for calc*/
+        const outputDisplay = document.createElement('div');
+      outputDisplay.className = "display";
+      outputDisplay.id = "outputDisplay";
+      const resultText = document.createElement('p');
+      resultText.id = "resultText";
+      resultText.textContent = "";
+      outputDisplay.appendChild(resultText);
+      dWrap.appendChild(outputDisplay);
+
+      /* Actual Functionality Methods*/
+      let a = "";
+      let b = "";
+      let op = "";
+      let lastEntered = ""
+      const places = 8; /* how many decimal places in results */
+
+      function enterText(e){
+          const clicked = e.target;
+          const textBox = document.querySelector("#resultText");
+          console.log("text: " + clicked.textContent);
+       
+         if(clicked.classList.contains("number")){
+             if(lastEntered == "." && clicked.textContent == "."){}
+            else if (lastEntered == "="){
+                console.log("works");
+                textBox.textContent = clicked.textContent;
+                lastEntered = clicked.textContent;  
+            }
+            else if(a == "" || b == ""){
+                console.log("weird");
+                textBox.textContent += clicked.textContent;
+                lastEntered = clicked.textContent;   
+            }
+            
+             
+         }
+        if(clicked.classList.contains("operation")){
+            if(op!=""){
+                b = textBox.textContent;
+                result = operate(op,a,b);
+                a = operate(op, a, b);
+                textBox.textContent = a;
+                b = "";
+                lastEntered = "=";
+                op = clicked.textContent;
+                if(clicked.id == "opSub"){
+                   op = "s"
+              }
+            }
+            else{
+               a = textBox.textContent;
+               textBox.textContent = "";
+
+              op = clicked.textContent;
+              lastEntered = clicked.textContent; 
+              if(clicked.id == "opSub"){
+                op = "s";
+                lastEntered = "s";
+             }
+            }
+         }
+        if(clicked.id == "opClear"){
+            lastEntered = clicked.textContent; 
+            a = ""
+            b = ""
+            op = ""
+            textBox.textContent = "";
+        } 
+        
+        if(clicked.id == "opEq"){
+            lastEntered = clicked.textContent; 
+            b = textBox.textContent;
+
+            if(b == ""){
+                textBox.textContent = a;  
+                op = ""; 
+            }
+            if(op == ""){
+            }
+
+            if(op != "" && b!= ""){
+                textBox.textContent = operate(op, a, b);
+                a = textBox.textContent;
+                op = ""
+                b = ""
+            }
+
+        } 
+      }
+
+      add = (a, b) => parseFloat((Number(a) + Number(b)).toFixed(places));
+      sub = (a, b) => parseFloat((Number(a) - Number(b)).toFixed(places));
+      mult= (a, b) => parseFloat((Number(a) * Number(b)).toFixed(places));
+      divy = (a, b) => parseFloat((Number(a) / Number(b)).toFixed(places)); 
+
+      function operate(operator, a, b){
+          console.log(operator);
+          switch(operator){
+              case("+"): return add(a,b);
+              case("s"): return sub(a,b);
+              case("x"): return mult(a,b);
+              case("÷"): return divy(a,b);
+              default: return "error";
+          }
+      }
+
+      
   </script>
   </body>
 </html>
