@@ -163,6 +163,12 @@ body,html {
     color: #fff1c1c0;
 }
 
+@media only screen and (max-width: 480px){
+    html{
+        background-color: white;
+    }
+}
+
 /* IMPLEMENT TEXT COLOR CHANGE ON HOVER
    IMPLEMENT FIX FOR 5/3 * 3 = 5.000001 
    */

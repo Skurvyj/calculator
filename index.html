@@ -121,7 +121,7 @@
       let b = "";
       let op = "";
       let lastEntered = ""
-      const places = 8; /* how many decimal places in results */
+      const places = 7; /* how many decimal places in results */
 
       function enterText(e){
           const clicked = e.target;
@@ -130,14 +130,13 @@
        
          if(clicked.classList.contains("number")){
              if(lastEntered == "." && clicked.textContent == "."){}
-             else if(textBox.textContent.length > 9){}
+             else if(textBox.textContent.length > places + 2){}
             else if (lastEntered == "="){
                 console.log("works");
                 textBox.textContent = clicked.textContent;
                 lastEntered = clicked.textContent;  
             }
             else if(a == "" || b == ""){
-                console.log("weird");
                 textBox.textContent += clicked.textContent;
                 lastEntered = clicked.textContent;   
             }
@@ -147,7 +146,9 @@
         if(clicked.classList.contains("operation")){
             if(op!=""){
                 b = textBox.textContent;
+                console.log("A: " + a + " B: " + b + " Op: " + op);
                 let result = operate(op,a,b);
+                console.log("result: " + result);
                 /*
                 Known error where if you try to 
                 chain operations with expontential
@@ -160,6 +161,7 @@
                 b = "";
                 lastEntered = "=";
                 op = clicked.textContent;
+                console.log("A: " + a + " B: " + b + " Op: " + op);
                 if(clicked.id == "opSub"){
                    op = "s"
               }
